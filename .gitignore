@@ -1,0 +1,4 @@
+# Project exclude paths
+/excel/target/
+/rabbitmq/target/
+/redis/target/
