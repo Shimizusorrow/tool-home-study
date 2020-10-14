@@ -89,8 +89,50 @@ public class HuToolTest {
         System.out.println(productDate2Hex(1602315857000L));
         System.out.println((1602315857000L - MIN_PRODUCT_TIME) / Timer.ONE_DAY);
 
-        String x="1234567891234567890012345";
-        System.out.println(x.substring(20,24));
+        String x = "1234567891234567890012345";
+        System.out.println(x.substring(20, 24));
+    }
+
+    @Test
+    void _2020_10_13() {
+        String equipRfidValue = "33030014103011001D9B0001";
+        System.out.println(EquipRfidParseUtils.parseDistrictNumber(equipRfidValue));
+        System.out.println(EquipRfidParseUtils.parseSupplierNumber(equipRfidValue));
+        System.out.println(EquipRfidParseUtils.parseEquipClassificationNumber(equipRfidValue));
+        System.out.println(EquipRfidParseUtils.parseWriterNumber(equipRfidValue));
+        System.out.println(EquipRfidParseUtils.parseShelfLifeNumber(equipRfidValue));
+        System.out.println(EquipRfidParseUtils.parseProductDateNumber(equipRfidValue));
+        System.out.println(EquipRfidParseUtils.parseEquipSerialNumber(equipRfidValue));
+
+        StringBuilder stringBuilder=new StringBuilder();
+        String string = stringBuilder
+                //预留编号 默认为F
+                .append("F")
+                .append(EquipRfidParseUtils.parseDistrictNumber(equipRfidValue))
+                .append(EquipRfidParseUtils.parseSupplierNumber(equipRfidValue))
+                .append(EquipRfidParseUtils.parseEquipClassificationNumber(equipRfidValue))
+                //写入者编号默认为0
+                .append("0")
+                .append("0")
+                .append(addOneEquipSerialNumber(EquipRfidParseUtils.parseEquipSerialNumber(equipRfidValue)))
+                .append(EquipRfidParseUtils.parseShelfLifeNumber(equipRfidValue))
+                .append(EquipRfidParseUtils.parseProductDateNumber(equipRfidValue))
+                .toString();
+
+        System.out.println(string);
+
+        long l = Long.parseLong("000a",16);
+        System.out.println(String.format("%04x",l+1));
+        System.out.println(l);
+    }
+
+    @Test
+    void _2020_10_14(){
+      
+    }
+
+    private String addOneEquipSerialNumber(String equipSerialNumber) {
+        return String.format("%04x", Long.parseLong(equipSerialNumber) + 1);
     }
 
     private String shelfLife2Hex(Long shelfLife) {
@@ -118,6 +160,7 @@ public class HuToolTest {
         }
         return String.valueOf(year);
     }
+
     private final Long MIN_PRODUCT_TIME = 946656000000L;
 
     private String productDate2Hex(Long productDate) {
