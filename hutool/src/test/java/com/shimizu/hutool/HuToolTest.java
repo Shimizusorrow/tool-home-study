@@ -128,7 +128,7 @@ public class HuToolTest {
 
     @Test
     void _2020_10_14(){
-      
+
     }
 
     private String addOneEquipSerialNumber(String equipSerialNumber) {
