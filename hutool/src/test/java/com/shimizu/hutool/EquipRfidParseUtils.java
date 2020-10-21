@@ -18,12 +18,12 @@ public class EquipRfidParseUtils {
     }
 
     /**
-     * 解析Rfid供应商编号
+     * 解析Rfid装备参数编号
      *
      * @param equipRfid
      * @return
      */
-    public static String parseSupplierNumber(String equipRfid) {
+    public static String parseEquipArgNumber(String equipRfid) {
         return equipRfid.substring(4, 7);
     }
 

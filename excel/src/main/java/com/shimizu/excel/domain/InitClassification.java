@@ -15,9 +15,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
-import org.springframework.core.io.Resource;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,8 +43,8 @@ public class InitClassification {
     private EquipClassificationRepo equipClassificationRepo;
     private Environment environment;
 
-    @Value("classpath:zbInf.xlsx")
-    private Resource resource;
+//    @Value("classpath:zbInf.xlsx")
+//    private Resource resource;
 
     @GetMapping("/classification")
     public void initClassification(@RequestParam String fileName) throws Exception {

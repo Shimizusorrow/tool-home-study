@@ -4,16 +4,16 @@ import cn.hutool.core.convert.Convert;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import sun.rmi.runtime.Log;
 
 import javax.management.timer.Timer;
 import java.nio.charset.Charset;
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
-import java.util.Random;
 import java.util.stream.Collectors;
+
+import static com.shimizu.hutool.BoxRfidParseUtils.parseEquipCount;
 
 
 /**
@@ -97,19 +97,19 @@ public class HuToolTest {
     void _2020_10_13() {
         String equipRfidValue = "33030014103011001D9B0001";
         System.out.println(EquipRfidParseUtils.parseDistrictNumber(equipRfidValue));
-        System.out.println(EquipRfidParseUtils.parseSupplierNumber(equipRfidValue));
+        System.out.println(EquipRfidParseUtils.parseEquipArgNumber(equipRfidValue));
         System.out.println(EquipRfidParseUtils.parseEquipClassificationNumber(equipRfidValue));
         System.out.println(EquipRfidParseUtils.parseWriterNumber(equipRfidValue));
         System.out.println(EquipRfidParseUtils.parseShelfLifeNumber(equipRfidValue));
         System.out.println(EquipRfidParseUtils.parseProductDateNumber(equipRfidValue));
         System.out.println(EquipRfidParseUtils.parseEquipSerialNumber(equipRfidValue));
 
-        StringBuilder stringBuilder=new StringBuilder();
+        StringBuilder stringBuilder = new StringBuilder();
         String string = stringBuilder
                 //预留编号 默认为F
                 .append("F")
                 .append(EquipRfidParseUtils.parseDistrictNumber(equipRfidValue))
-                .append(EquipRfidParseUtils.parseSupplierNumber(equipRfidValue))
+                .append(EquipRfidParseUtils.parseEquipArgNumber(equipRfidValue))
                 .append(EquipRfidParseUtils.parseEquipClassificationNumber(equipRfidValue))
                 //写入者编号默认为0
                 .append("0")
@@ -121,15 +121,30 @@ public class HuToolTest {
 
         System.out.println(string);
 
-        long l = Long.parseLong("000a",16);
-        System.out.println(String.format("%04x",l+1));
+        long l = Long.parseLong("000a", 16);
+        System.out.println(String.format("%04x", l + 1));
         System.out.println(l);
     }
 
     @Test
-    void _2020_10_14(){
+    void _2020_10_21() {
+        String boxrfid = "33030014101002001d9b00030061ffff";
+
+//        System.out.println(boxrfid.length());
+        System.out.println(BoxRfidParseUtils.parseEquipSerialNumber(boxrfid));
+        System.out.println(BoxRfidParseUtils.parseEquipRfidNoSerial(boxrfid));
+        System.out.println(parseEquipCount(boxrfid));
+
+        String a = "a";
+        System.out.println(Long.parseLong(a, 16));
+
+        HashSet<String> set = BoxRfidParseUtils.parseBoxRfid2EquipRfidSet(boxrfid);
+        set.forEach(it -> System.out.println(it));
 
     }
+
+
+
 
     private String addOneEquipSerialNumber(String equipSerialNumber) {
         return String.format("%04x", Long.parseLong(equipSerialNumber) + 1);

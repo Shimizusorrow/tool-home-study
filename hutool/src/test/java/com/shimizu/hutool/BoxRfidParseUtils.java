@@ -1,7 +1,9 @@
 package com.shimizu.hutool;
 
+import java.util.HashSet;
+
 /**
- * 用于解析装备Rfid
+ * 用于解析箱Rfid
  *
  * @author shimizu
  * @date 2020年10月13日15:39:47
@@ -18,12 +20,12 @@ public class BoxRfidParseUtils {
     }
 
     /**
-     * 解析Rfid供应商编号
+     * 解析Rfid装备参数编号
      *
      * @param equipRfid
      * @return
      */
-    public static String parseSupplierNumber(String equipRfid) {
+    public static String parseEquipArgNumber(String equipRfid) {
         return equipRfid.substring(4, 7);
     }
 
@@ -75,5 +77,49 @@ public class BoxRfidParseUtils {
      */
     public static String parseEquipSerialNumber(String equipRfid) {
         return equipRfid.substring(20, 24);
+    }
+
+    /**
+     * 解析装备的起止Rfid 不包含序号
+     */
+    public static String parseEquipRfidIncludeSerial(String equipRfid) {
+        return equipRfid.substring(0, 24);
+    }
+
+    /**
+     * 解析装备起止的Rfid 不含序号
+     *
+     * @param equipRfid
+     * @return
+     */
+    public static String parseEquipRfidNoSerial(String equipRfid) {
+        return equipRfid.substring(0, 20);
+    }
+
+    /**
+     * 解析装备数量
+     *
+     * @param equipRfid
+     * @return
+     */
+    public static String parseEquipCount(String equipRfid) {
+        return equipRfid.substring(24, 27);
+    }
+
+    /**
+     * 解析箱Rfid 返回所代表的装备Rfid
+     *
+     * @param boxRfid
+     * @return
+     */
+    public static HashSet<String> parseBoxRfid2EquipRfidSet(String boxRfid) {
+        HashSet<String> set = new HashSet();
+        String rfidNoSerial = parseEquipRfidNoSerial(boxRfid);
+        Long serialNumber = Long.parseLong(parseEquipSerialNumber(boxRfid), 16);
+        Long equipCount = Long.parseLong(parseEquipCount(boxRfid), 16);
+        for (long l = 0; l < equipCount; l++) {
+            set.add(rfidNoSerial + String.format("%04x", serialNumber + l));
+        }
+        return set;
     }
 }
