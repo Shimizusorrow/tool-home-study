@@ -139,11 +139,9 @@ public class HuToolTest {
         System.out.println(Long.parseLong(a, 16));
 
         HashSet<String> set = BoxRfidParseUtils.parseBoxRfid2EquipRfidSet(boxrfid);
-        set.forEach(it -> System.out.println(it));
+        set.forEach(System.out::println);
 
     }
-
-
 
 
     private String addOneEquipSerialNumber(String equipSerialNumber) {

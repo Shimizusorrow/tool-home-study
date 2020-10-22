@@ -80,7 +80,7 @@ public class BoxRfidParseUtils {
     }
 
     /**
-     * 解析装备的起止Rfid 不包含序号
+     * 解析装备的起止Rfid 包含序号
      */
     public static String parseEquipRfidIncludeSerial(String equipRfid) {
         return equipRfid.substring(0, 24);
