@@ -6,6 +6,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import javax.management.timer.Timer;
+import java.lang.reflect.Array;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -143,6 +144,15 @@ public class HuToolTest {
 
     }
 
+    @Test
+    void _2020_10_22() {
+        String a = "9";
+        String s = String.format("%02d", Long.parseLong(a));
+        System.out.println(s);
+        System.out.println(String.format("%04x", (int) (Math.random() * 9999)));
+
+    }
+
 
     private String addOneEquipSerialNumber(String equipSerialNumber) {
         return String.format("%04x", Long.parseLong(equipSerialNumber) + 1);
@@ -172,6 +182,27 @@ public class HuToolTest {
             return "f";
         }
         return String.valueOf(year);
+    }
+
+    @Test
+    void _2020_10_26() {
+        List<String> strings = Arrays.asList("1", "2", "3");
+        List<String> collect = strings.stream().filter(it -> !it.equals("1")).collect(Collectors.toList());
+        System.out.println(collect);
+    }
+
+    @Test
+    void _2020_10_30() {
+        System.out.println(feiBoNaQi(0, 1, 10));
+    }
+
+    private int feiBoNaQi(int cur, int next, int n) {
+        if (n == 0) {
+            return cur;
+        } else {
+            System.out.println(next);
+            return feiBoNaQi(next, cur + next, n - 1);
+        }
     }
 
     private final Long MIN_PRODUCT_TIME = 946656000000L;
