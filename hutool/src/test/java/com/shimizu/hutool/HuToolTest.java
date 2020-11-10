@@ -8,11 +8,9 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import javax.management.timer.Timer;
 import java.lang.reflect.Array;
 import java.nio.charset.Charset;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static com.shimizu.hutool.BoxRfidParseUtils.parseEquipCount;
 
@@ -194,6 +192,55 @@ public class HuToolTest {
     @Test
     void _2020_10_30() {
         System.out.println(feiBoNaQi(0, 1, 10));
+    }
+
+    @Test
+    void _2020_11_2() {
+        Stream.iterate(0, x -> x + 1).limit(10).forEach(
+                it -> {
+                    System.out.println(getNoRepeatRfid());
+                }
+        );
+    }
+
+    /**
+     * 生成不重复的Rfid
+     *
+     * @return
+     */
+    private String getNoRepeatRfid() {
+        String temp = generateRfid();
+        while (isIncludeRfid(temp)) {
+            temp = generateRfid();
+        }
+        return temp;
+    }
+
+    private static final Set<String> RFID_SET = new HashSet<>();
+
+    /**
+     * 判断是否存在了rfid
+     *
+     * @param rfid
+     * @return
+     */
+    private boolean isIncludeRfid(String rfid) {
+        if (RFID_SET.contains(rfid)) {
+            return true;
+        } else {
+            RFID_SET.add(rfid);
+            return false;
+        }
+    }
+
+    /**
+     * 生成8位 16进制的Rfid
+     *
+     * @return
+     * @date 2020年11月5日15:59:55 补充转大写
+     */
+    private String generateRfid() {
+        return (String.format("%06x", (int) (Math.random() * 999999)) + String.format("%02x", (int) (Math.random() * 99))).toUpperCase();
     }
 
     private int feiBoNaQi(int cur, int next, int n) {

@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import javax.management.timer.Timer;
 import java.text.ParseException;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
@@ -12,6 +13,13 @@ import java.util.Date;
 
 @ExtendWith(SpringExtension.class)
 public class TimeFormatTest {
+
+    @Test
+    void _2020_11_3(){
+        long day=5184000000L;
+        System.out.println(day/ Timer.ONE_DAY);
+    }
+
     /**
      * 时间格式转换成时间戳
      */
