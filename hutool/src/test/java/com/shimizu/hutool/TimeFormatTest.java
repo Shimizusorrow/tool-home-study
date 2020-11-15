@@ -18,6 +18,8 @@ public class TimeFormatTest {
     void _2020_11_3(){
         long day=5184000000L;
         System.out.println(day/ Timer.ONE_DAY);
+        String a="0";
+        System.out.println(Integer.parseInt(a));
     }
 
     /**
