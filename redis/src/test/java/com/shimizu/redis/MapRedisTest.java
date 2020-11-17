@@ -1,7 +1,7 @@
 package com.shimizu.redis;
 
 import com.alibaba.fastjson.JSON;
-import com.shimizu.redis.config.Dcs;
+import com.shimizu.redis.domain.Dcs;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,12 +14,8 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.useRepresentation;
 
 /**
  * Created Date : 2020/09/28
@@ -74,7 +70,9 @@ public class MapRedisTest {
 //        redisTemplate.opsForValue().set(KEY, JSON.toJSONString(dcs));
 //        redisTemplate.opsForHash().put(KEY, "1123", "123");
         Dcs dcs1 = new Dcs("1", "张三", "男");
+        Dcs dcs2 = new Dcs("2", "李四", "女");
         redisTemplate.opsForHash().put(KEY, dcs1.getId(), JSON.toJSONString(dcs1));
+        redisTemplate.opsForHash().put(KEY, dcs2.getId(), JSON.toJSONString(dcs2));
 
 
 //        redisTemplate.opsForHash().get();
@@ -89,6 +87,13 @@ public class MapRedisTest {
         Dcs dcs = JSON.parseObject((String) redisTemplate.opsForHash().get(KEY, "1"), Dcs.class);
 //        Dcs dcs = (Dcs) redisTemplate.opsForHash().get(KEY, "1");
         System.out.println(dcs.toString());
+    }
+
+    @Test
+    void mapRemove() {
+//        ArrayList<String> strings = new ArrayList<>(Arrays.asList("0", "1"));
+//        redisTemplate.opsForHash().delete(KEY, strings.toArray());
+        redisTemplate.opsForHash().delete(KEY, new String[]{"0", "1"});
     }
 
 

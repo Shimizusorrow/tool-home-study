@@ -1,7 +1,6 @@
 package com.shimizu.excel.utils;
 
 import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.util.CellRangeAddress;
@@ -29,7 +28,7 @@ public class ExcelUtils {
             case NUMERIC:
                 return String.valueOf((int) cell.getNumericCellValue());
             default:
-                return null;
+                return "";
         }
     }
 

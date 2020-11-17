@@ -21,6 +21,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 /**
@@ -33,6 +34,13 @@ import java.util.List;
 public class excelTest {
 
     final String excelPath = "C:\\Users\\Shimizu\\Desktop\\装备信息模板.xlsx";
+    private final String ExcelName = "";
+    private final String SHEET_NAME = "";
+
+    @Test
+    void useGetData() throws Exception {
+        getData(ExcelName, SHEET_NAME);
+    }
 
     @Test
     void test() {
@@ -159,5 +167,76 @@ public class excelTest {
 
         System.out.println(data.size());
 
+    }
+
+    /**
+     * 将Excel中的数据导出 以二维数组的形式
+     *
+     * @param fileName  Excel的名字 XXX.xlsx
+     * @param sheetName 表单的名字 sheet1
+     * @return
+     * @throws Exception
+     */
+    private List<ArrayList<String>> getData(String fileName, String sheetName) throws Exception {
+        String dir = System.getProperty("user.dir");
+//        String dir = "D:\\work_save\\corporate\\warehouse_system";
+        List<ArrayList<String>> data = new ArrayList<ArrayList<String>>();
+        Workbook wb;
+        Sheet sheet;
+        final String filePath = dir + "\\" + fileName;
+        File excel = new File(filePath);
+        if (!excel.exists()) {
+            throw new Exception("文件不存在,请检查路径文件!" + filePath);
+        }
+        if (sheetName == null || sheetName.isEmpty()) {
+            throw new Exception("表单名字不可为空!");
+        }
+        try {
+            wb = new XSSFWorkbook(excel);
+            sheet = wb.getSheet(sheetName);
+            //校验表单是否存在
+            if (sheet == null) {
+                throw new Exception(String.format("表单不存在!请校验表单名字: %s 是否填写正确", fileName));
+            }
+            //合并单元格的 列表
+            List<CellRangeAddress> combineCell = ExcelUtils.getCombineCell(sheet);
+            //第一行是列名，所以不读
+            int firstRowIndex = sheet.getFirstRowNum() + 1;
+            int lastRowIndex = sheet.getLastRowNum();
+
+            for (int rIndex = firstRowIndex; rIndex < lastRowIndex; rIndex++) {
+                Row row = sheet.getRow(rIndex);
+                if (row != null) {
+                    ArrayList<String> list = new ArrayList<>();
+                    int firstCellIndex = row.getFirstCellNum();
+                    int lastCellIndex = row.getLastCellNum();
+                    for (int cIndex = firstCellIndex; cIndex < lastCellIndex; cIndex++) {
+                        Cell cell = row.getCell(cIndex);
+                        if (cell != null) {
+                            //判断是否是合并的单元格 如果是则返回合并单元格的值
+                            String cellValue = ExcelUtils.isCombineCell(combineCell, cell, sheet);
+                            if (cellValue != null) {
+                                list.add(cellValue);
+                            } else {
+                                list.add(ExcelUtils.getCellValue(cell));
+                            }
+                        } else {
+                            list.add("");
+                        }
+                    }
+                    //添加 这一行的数据
+                    data.add(list);
+                }
+            }
+        } catch (InvalidFormatException | IOException e) {
+            e.printStackTrace();
+        }
+        /**
+         * 导入过滤
+         */
+        return data.stream()
+                .filter(it -> !it.isEmpty())
+                .filter(it -> !"".equals(it.get(0)))
+                .collect(Collectors.toList());
     }
 }

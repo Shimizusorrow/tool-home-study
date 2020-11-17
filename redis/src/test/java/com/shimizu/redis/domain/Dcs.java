@@ -1,8 +1,11 @@
-package com.shimizu.redis.config;
+package com.shimizu.redis.domain;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * 测试对象
+ */
 @Data
 @NoArgsConstructor
 public class Dcs {
