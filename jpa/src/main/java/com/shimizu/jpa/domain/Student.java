@@ -7,8 +7,11 @@ import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
+import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
 
 /**
  * 学生实体
@@ -25,6 +28,8 @@ public class Student extends BaseEntity {
     private String name;
 
     private String gender;
+
+
 
     /**
      * 普通构造器

@@ -1,6 +1,7 @@
 package com.shimizu.jpa;
 
 import com.shimizu.jpa.domain.Student;
+import com.shimizu.jpa.domain.StudentItems;
 import com.shimizu.jpa.domain.Teacher;
 import com.shimizu.jpa.repo.StuRepo;
 import com.shimizu.jpa.repo.TeaRepo;
@@ -17,6 +18,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import javax.management.timer.Timer;
 import java.util.Comparator;
+import java.util.HashSet;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -53,7 +55,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 /**
  * 回滚 TODO 得对它进行测试 好像只回滚了最后一次提交的东西?!
  */
-@Rollback(value = true)
+@Rollback(value = false)
 public class Junit5TestJpa {
     @Autowired
     private StuRepo stuRepo;
@@ -73,7 +75,7 @@ public class Junit5TestJpa {
     void initStudent() throws InterruptedException {
         for (int i = 0; i < 5; i++) {
             stuRepo.save(new Student("张" + i, "男"));
-            Thread.sleep(Timer.ONE_SECOND * 2);
+//            Thread.sleep(Timer.ONE_SECOND * 2);
         }
     }
 
@@ -81,8 +83,60 @@ public class Junit5TestJpa {
     void initTea() throws InterruptedException {
         for (int i = 0; i < 2; i++) {
             teaRepo.save(new Teacher("王" + i, "女"));
-            Thread.sleep(Timer.ONE_SECOND * 3);
+//            Thread.sleep(Timer.ONE_SECOND * 3);
         }
+    }
+
+    @Test
+    void teaAdd() {
+        Student student = stuRepo.findByName("张0");
+        Teacher teacher = teaRepo.findByName("王1");
+        Teacher teacher1 = teaRepo.findByName("王0");
+
+//        teacher.setStudents(new HashSet<StudentItems>() {{
+//            add(new StudentItems(teacher.getId(), student));
+//        }});
+//        teacher.setStudents(new HashSet<StudentItems>() {{
+//            add(new StudentItems(teacher1.getId(), student));
+//        }});
+
+        teaRepo.save(teacher);
+        teaRepo.save(teacher1);
+    }
+
+    @Test
+    void testAll() {
+        for (int i = 0; i < 5; i++) {
+            stuRepo.save(new Student("张" + i, "男"));
+//            Thread.sleep(Timer.ONE_SECOND * 2);
+        }
+        for (int i = 0; i < 2; i++) {
+            teaRepo.save(new Teacher("王" + i, "女"));
+//            Thread.sleep(Timer.ONE_SECOND * 3);
+        }
+        Student student = stuRepo.findByName("张0");
+        Teacher teacher = teaRepo.findByName("王1");
+        Teacher teacher1 = teaRepo.findByName("王0");
+
+        teacher.setStudents(new HashSet<StudentItems>() {{
+            add(new StudentItems(teacher, student));
+        }});
+
+        teacher1.setStudents(new HashSet<StudentItems>() {{
+            add(new StudentItems(teacher1, student));
+        }});
+
+        teaRepo.save(teacher);
+        teaRepo.save(teacher1);
+    }
+
+    @Test
+    void del() {
+        stuRepo.delete(stuRepo.findByName("张0"));
+    }
+    @Test
+    void del2(){
+        teaRepo.delete(teaRepo.findByName("王1"));
     }
 
     @Test

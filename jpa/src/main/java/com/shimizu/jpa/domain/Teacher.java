@@ -4,8 +4,12 @@ import com.shimizu.jpa.domain.base.BaseEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author shimizu
@@ -18,6 +22,10 @@ public class Teacher extends BaseEntity {
     private String name;
 
     private String gender;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = StudentItems.FEIGN_KEY)
+    private Set<StudentItems> students = new HashSet<>();
 
     public Teacher(String name, String gender) {
         this.name = name;

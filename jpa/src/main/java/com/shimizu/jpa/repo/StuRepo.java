@@ -10,4 +10,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @date 2020年11月17日11:50:03
  */
 public interface StuRepo extends JpaRepository<Student, String> {
+
+    Student findByName(String name);
 }
