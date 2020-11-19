@@ -103,7 +103,9 @@ public class TestEquipBox {
      */
     @Test
     void delEquip() {
-        List<Equip> equips = equipRepo.findAll().stream().limit(2).collect(Collectors.toList());
+        List<Equip> equips = equipRepo.findAll().stream()
+                .limit(2)
+                .collect(Collectors.toList());
         equips.forEach(it -> log.info(it.getId()));
         equipRepo.deleteAll(equips);
     }
@@ -117,13 +119,20 @@ public class TestEquipBox {
         equipBoxRepo.delete(equipBox);
     }
 
+    /**
+     *
+     */
+    @Test
     void changeEquipState() {
-        List<Equip> equips = equipRepo.findAll().stream().limit(2).collect(Collectors.toList());
-        
+        Equip equip = equipRepo.findAll().stream().findFirst().get();
+        log.info(equip.getId());
+        equip.setState(true);
+//        equip.publishSelf();
+        equipRepo.save(equip);
     }
 
     @EventListener
-    public void EquipState(Equip equip){
+    public void EquipState(Equip equip) {
 
     }
 
