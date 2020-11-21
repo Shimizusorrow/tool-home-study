@@ -9,11 +9,17 @@ import javax.management.timer.Timer;
 import java.text.ParseException;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Date;
 
 @ExtendWith(SpringExtension.class)
 public class TimeFormatTest {
 
+    @Test
+    void testLocalData(){
+        System.out.println(LocalDate.now().toString()+" "+ LocalTime.now());
+    }
     @Test
     void _2020_11_3(){
         long day=5184000000L;

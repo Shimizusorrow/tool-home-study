@@ -1,7 +1,5 @@
 package com.shimizu.jpa.domain.base;
 
-import com.sun.istack.internal.NotNull;
-import lombok.NoArgsConstructor;
 import org.springframework.data.domain.AfterDomainEventPublication;
 import org.springframework.data.domain.DomainEvents;
 
@@ -34,11 +32,11 @@ public interface BaseEvents {
     @DomainEvents
     Set<Object> domainEvents();
 
-//    @AfterDomainEventPublication
-//    default void afterPublication() {
-//        Set<Object> events = domainEvents();
-//        if (events != null) {
-//            events.clear();
-//        }
-//    }
+    @AfterDomainEventPublication
+    default void afterPublication() {
+        Set<Object> events = domainEvents();
+        if (events != null) {
+            events.clear();
+        }
+    }
 }

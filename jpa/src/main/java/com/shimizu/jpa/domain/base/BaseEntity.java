@@ -3,7 +3,6 @@ package com.shimizu.jpa.domain.base;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.stereotype.Service;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -16,7 +15,7 @@ import java.util.Set;
 @Getter
 @Setter
 public class BaseEntity implements BaseEvents {
-//public class BaseEntity  {
+
     @Id
     private String id;
     private long updateTime;

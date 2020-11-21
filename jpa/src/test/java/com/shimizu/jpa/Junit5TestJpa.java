@@ -17,7 +17,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import javax.management.timer.Timer;
-import java.util.Comparator;
 import java.util.HashSet;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -134,8 +133,9 @@ public class Junit5TestJpa {
     void del() {
         stuRepo.delete(stuRepo.findByName("张0"));
     }
+
     @Test
-    void del2(){
+    void del2() {
         teaRepo.delete(teaRepo.findByName("王1"));
     }
 
