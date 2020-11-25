@@ -18,6 +18,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import javax.management.timer.Timer;
 import java.util.HashSet;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -73,7 +74,7 @@ public class Junit5TestJpa {
     @Test
     void initStudent() throws InterruptedException {
         for (int i = 0; i < 5; i++) {
-            stuRepo.save(new Student("张" + i, "男"));
+            stuRepo.save(new Student("张" + i, "男", i + ""));
 //            Thread.sleep(Timer.ONE_SECOND * 2);
         }
     }
@@ -150,6 +151,16 @@ public class Junit5TestJpa {
     }
 
     @Test
+    void findSchoolNumber() {
+        List<Student> all = stuRepo.findBySchoolNumber(null);
+        System.out.println("all:+++++++++++");
+        all.forEach(it -> System.out.println(it.getName()));
+        List<Student> r1 = stuRepo.findBySchoolNumber("0");
+        System.out.println("r1:------------");
+        r1.forEach(it -> System.out.println(it.getName()));
+    }
+
+    @Test
     void findStu() {
         stuRepo.findAll().stream()
                 .sorted((o1, o2) -> (int) (o1.getCreateTime() - o2.getCreateTime()))
@@ -158,4 +169,5 @@ public class Junit5TestJpa {
                         }
                 );
     }
+
 }

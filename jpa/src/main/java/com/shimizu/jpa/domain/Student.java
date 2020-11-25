@@ -29,6 +29,7 @@ public class Student extends BaseEntity {
 
     private String gender;
 
+    private String schoolNumber;
 
 
     /**
@@ -42,4 +43,9 @@ public class Student extends BaseEntity {
         this.gender = gender;
     }
 
+    public Student(String name, String gender, String schoolNumber) {
+        this.name = name;
+        this.gender = gender;
+        this.schoolNumber = schoolNumber;
+    }
 }

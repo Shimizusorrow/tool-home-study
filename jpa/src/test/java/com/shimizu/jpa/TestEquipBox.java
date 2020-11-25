@@ -98,6 +98,16 @@ public class TestEquipBox {
         equipBoxRepo.save(equipBox);
     }
 
+    @Test
+    void findEquip(){
+        List<Equip> stateT = equipRepo.findByState(true);
+        System.out.println("True:+++++++++++++++++++++");
+        stateT.forEach(it-> System.out.println(it.isState()));
+        System.out.println("False:--------------------");
+        List<Equip> stateF = equipRepo.findByState(false);
+        stateF.forEach(it-> System.out.println(it.isState()));
+    }
+
     /**
      * 删除装备检查中间级联的表是否会删除
      */
