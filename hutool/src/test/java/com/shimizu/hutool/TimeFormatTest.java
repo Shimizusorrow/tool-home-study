@@ -17,14 +17,15 @@ import java.util.Date;
 public class TimeFormatTest {
 
     @Test
-    void testLocalData(){
-        System.out.println(LocalDate.now().toString()+" "+ LocalTime.now());
+    void testLocalData() {
+        System.out.println(LocalDate.now().toString() + " " + LocalTime.now());
     }
+
     @Test
-    void _2020_11_3(){
-        long day=5184000000L;
-        System.out.println(day/ Timer.ONE_DAY);
-        String a="0";
+    void _2020_11_3() {
+        long day = 5184000000L;
+        System.out.println(day / Timer.ONE_DAY);
+        String a = "0";
         System.out.println(Integer.parseInt(a));
     }
 
@@ -45,6 +46,15 @@ public class TimeFormatTest {
 
         System.out.println(time.getTime());
         System.out.println(millisecond2TimeFormat(System.currentTimeMillis()));
+    }
+
+    /**
+     * 输出三天的时间戳
+     */
+    @Test
+    void _2020_12_2() {
+        System.out.println(30365080000L/Timer.ONE_DAY);
+//        System.out.println(Timer.ONE_DAY * 3);
     }
 
     /**
@@ -75,4 +85,5 @@ public class TimeFormatTest {
         Date date = new Date(millisecond);
         return simpleDateFormat.format(date);
     }
+
 }

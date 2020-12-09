@@ -12,4 +12,10 @@ public class SyStemTest {
             System.out.println(String.format("key:[%s] -> v:[%s]", key, v));
         });
     }
+
+    @Test
+    void test(){
+        String format = String.format("%04x", 65535);
+        System.out.println(format);
+    }
 }

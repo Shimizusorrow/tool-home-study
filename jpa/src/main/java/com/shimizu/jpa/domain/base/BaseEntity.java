@@ -3,6 +3,7 @@ package com.shimizu.jpa.domain.base;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -17,6 +18,9 @@ import java.util.Set;
 public class BaseEntity implements BaseEvents {
 
     @Id
+    @GenericGenerator(name = "baseIdGenerator", strategy = "uuid")
+    @GeneratedValue(generator = "baseIdGenerator")
+    @Column(length = 40)
     private String id;
     private long updateTime;
     private long createTime;

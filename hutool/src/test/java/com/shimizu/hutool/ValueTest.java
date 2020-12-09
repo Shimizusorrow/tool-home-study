@@ -20,5 +20,11 @@ public class ValueTest {
         System.out.println(Box.goods);
     }
 
+    @Test
+    void testString(){
+        String a=null;
+        System.out.println(a.length());
+    }
+
 }
 

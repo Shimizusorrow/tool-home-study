@@ -61,10 +61,11 @@ public class StreamTest {
         /**
          * 对名字进行去重
          */
-        ArrayList<User> duplicateName = users.stream().collect(Collectors.collectingAndThen(
-                Collectors.toCollection(() -> new TreeSet<>(Comparator.comparing(User::getName))),
-                ArrayList::new
-        ));
+//        ArrayList<User> duplicateName = users.stream().collect(Collectors.collectingAndThen(
+//                Collectors.toCollection(() -> new TreeSet<>(Comparator.comparing(User::getName))),
+//                ArrayList::new
+//        ));
+        List<User> duplicateName = users.stream().filter(it -> !it.name.equals("张三")).collect(Collectors.toList());
         users.forEach(it -> {
             System.out.println(it.toString());
         });
