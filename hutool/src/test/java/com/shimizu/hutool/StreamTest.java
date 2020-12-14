@@ -13,6 +13,27 @@ import java.util.stream.Collectors;
 @ExtendWith(SpringExtension.class)
 public class StreamTest {
 
+
+    @Test
+    void testCollectAndThen() {
+        ArrayList<User> users = new ArrayList<>(Arrays.asList(
+                new User("张三", "男", 18),
+                new User("李四", "男", 18),
+                new User("王五", "男", 18),
+                new User("张三", "女", 16),
+                new User("张三", "女", 15),
+                new User("赵六", "男", 15),
+                new User("江七", "男", 20)
+        ));
+        ArrayList<String> collect = users.stream().collect(Collectors.collectingAndThen(
+                Collectors.collectingAndThen(
+                        Collectors.groupingBy(User::getName),
+                        it -> it.entrySet().stream().map(Map.Entry::getKey).collect(Collectors.toList())
+                ),
+                ArrayList::new
+        ));
+    }
+
     /**
      * 对数组元素 进行整合
      */
@@ -61,11 +82,11 @@ public class StreamTest {
         /**
          * 对名字进行去重
          */
-//        ArrayList<User> duplicateName = users.stream().collect(Collectors.collectingAndThen(
-//                Collectors.toCollection(() -> new TreeSet<>(Comparator.comparing(User::getName))),
-//                ArrayList::new
-//        ));
-        List<User> duplicateName = users.stream().filter(it -> !it.name.equals("张三")).collect(Collectors.toList());
+        ArrayList<User> duplicateName = users.stream().collect(Collectors.collectingAndThen(
+                Collectors.toCollection(() -> new TreeSet<>(Comparator.comparing(it -> it.getName() + it.gender))),
+                ArrayList::new
+        ));
+//        List<User> duplicateName = users.stream().filter(it -> !it.name.equals("张三")).collect(Collectors.toList());
         users.forEach(it -> {
             System.out.println(it.toString());
         });

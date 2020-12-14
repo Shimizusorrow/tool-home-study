@@ -21,12 +21,16 @@ public class TimeFormatTest {
         System.out.println(LocalDate.now().toString() + " " + LocalTime.now());
     }
 
+
     @Test
     void _2020_11_3() {
         long day = 5184000000L;
         System.out.println(day / Timer.ONE_DAY);
         String a = "0";
         System.out.println(Integer.parseInt(a));
+
+        System.out.println("======");
+        System.out.println(3*Timer.ONE_DAY*365);
     }
 
     /**

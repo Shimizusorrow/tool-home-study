@@ -11,3 +11,14 @@ spring:
     hibernate:
       # 目前是 update ,准确来说单元测试应该使用  create-drop
       ddl-auto: update
+
+departments:
+  name: 张三
+  department:
+    - {name: 张三,number: 0}
+
+    - {name: 李四,number: 5}
+  list:
+    - 1
+    - 2
+    - 3

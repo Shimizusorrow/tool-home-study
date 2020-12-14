@@ -22,9 +22,11 @@ public class ValueTest {
 
     @Test
     void testString(){
-        String a=null;
-        System.out.println(a.length());
+//        String a=null;
+//        System.out.println(a.length());
+        System.out.println(String.format("%x",200));
     }
+
 
 }
 
