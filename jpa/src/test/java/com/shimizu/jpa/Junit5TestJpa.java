@@ -99,7 +99,7 @@ public class Junit5TestJpa {
 //        teacher.setStudents(new HashSet<StudentItems>() {{
 //            add(new StudentItems(teacher1.getId(), student));
 //        }});
-
+        teacher.setStudent(student);
         teaRepo.save(teacher);
         teaRepo.save(teacher1);
     }
@@ -118,16 +118,20 @@ public class Junit5TestJpa {
         Teacher teacher = teaRepo.findByName("王1");
         Teacher teacher1 = teaRepo.findByName("王0");
 
-        teacher.setStudents(new HashSet<StudentItems>() {{
-            add(new StudentItems(teacher, student));
-        }});
-
-        teacher1.setStudents(new HashSet<StudentItems>() {{
-            add(new StudentItems(teacher1, student));
-        }});
+//        teacher.setStudents(new HashSet<StudentItems>() {{
+//            add(new StudentItems(teacher, student));
+//        }});
+//
+//        teacher1.setStudents(new HashSet<StudentItems>() {{
+//            add(new StudentItems(teacher1, student));
+//        }});
 
         teaRepo.save(teacher);
         teaRepo.save(teacher1);
+    }
+    @Test
+    void findTea(){
+        teaRepo.findByName("王1");
     }
 
     @Test

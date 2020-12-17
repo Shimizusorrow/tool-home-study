@@ -17,6 +17,14 @@ import java.util.Date;
 public class TimeFormatTest {
 
     @Test
+    void test() {
+        Long time = 63158400000L;
+        Long day = time / Timer.ONE_DAY;
+        System.out.println(day);
+        System.out.println(String.format("%x",day));
+    }
+
+    @Test
     void testLocalData() {
         System.out.println(LocalDate.now().toString() + " " + LocalTime.now());
     }
@@ -30,7 +38,7 @@ public class TimeFormatTest {
         System.out.println(Integer.parseInt(a));
 
         System.out.println("======");
-        System.out.println(3*Timer.ONE_DAY*365);
+        System.out.println(3 * Timer.ONE_DAY * 365);
     }
 
     /**
@@ -57,7 +65,7 @@ public class TimeFormatTest {
      */
     @Test
     void _2020_12_2() {
-        System.out.println(30365080000L/Timer.ONE_DAY);
+        System.out.println(30365080000L / Timer.ONE_DAY);
 //        System.out.println(Timer.ONE_DAY * 3);
     }
 

@@ -1,14 +1,13 @@
 package com.shimizu.jpa.controller;
 
 import com.shimizu.jpa.domain.Equip;
+import com.shimizu.jpa.domain.Teacher;
 import com.shimizu.jpa.repo.EquipRepo;
+import com.shimizu.jpa.repo.TeaRepo;
 import com.shimizu.jpa.service.EquipServie;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("/equip")
 @AllArgsConstructor
@@ -17,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class EquipController {
     private EquipServie equipServie;
     private EquipRepo equipRepo;
+    private TeaRepo teaRepo;
 
     @PutMapping("/test")
     public void changeEquipState(@RequestParam String equipId,
@@ -25,6 +25,11 @@ public class EquipController {
         equip.setState(state);
         equipRepo.save(equip);
         log.info("修改成功======");
+    }
+
+    @GetMapping("/test2")
+    public Teacher find(){
+        return teaRepo.findByName("王1");
     }
 
 }
