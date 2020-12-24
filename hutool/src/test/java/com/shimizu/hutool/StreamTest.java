@@ -13,6 +13,23 @@ import java.util.stream.Collectors;
 @ExtendWith(SpringExtension.class)
 public class StreamTest {
 
+    @Test
+    void filterTest() {
+        ArrayList<User> users = new ArrayList<>(Arrays.asList(
+                new User("张三", "男", 18),
+                new User("李四", "男", 18),
+                new User("王五", "男", 18),
+                new User("张三", "女", 16),
+                new User("张三", "女", 15),
+                new User("赵六", "男", 15),
+                new User("江七", "男", 20)
+        ));
+
+        users.stream().filter(it -> "张三".equals(it.getName()))
+                .collect(Collectors.toList())
+                .forEach(System.out::println);
+
+    }
 
     @Test
     void testCollectAndThen() {

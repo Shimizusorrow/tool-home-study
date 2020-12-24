@@ -23,9 +23,14 @@ import static com.shimizu.hutool.BoxRfidParseUtils.parseEquipCount;
 @ExtendWith(SpringExtension.class)
 public class HuToolTest {
     @Test
-    void test1(){
-        System.out.println(Timer.ONE_HOUR*5);
+    void test1() {
+        List<String> list = new ArrayList<>(500);
+        for (int i = 0; i < 500; i++) {
+            list.add(System.currentTimeMillis() +"***"+ String.valueOf((int) (Math.random() * 999)));
+        }
+        list.forEach(it-> System.out.println(it));
     }
+
     @Test
     void test() {
         for (int i = 0; i < 100; i++)
@@ -33,15 +38,17 @@ public class HuToolTest {
             System.out.println(randSurface());
 //        retry();
     }
+
     private SurfaceEnum randSurface() {
         if (((int) (Math.random() * 10) + 1) % 2 == 0) {
             return SurfaceEnum.A;
-        }else {
+        } else {
             return SurfaceEnum.B;
         }
     }
-    enum SurfaceEnum{
-        A,B
+
+    enum SurfaceEnum {
+        A, B
     }
 
     private void retry() {

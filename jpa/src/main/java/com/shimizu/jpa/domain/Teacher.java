@@ -28,7 +28,7 @@ public class Teacher extends BaseEntity {
 //    @JoinColumn(name = StudentItems.FEIGN_KEY)
 //    private Set<StudentItems> students = new HashSet<>();
 //    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private Student student;
 
     public Teacher(String name, String gender) {

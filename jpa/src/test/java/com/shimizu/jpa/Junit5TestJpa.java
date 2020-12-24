@@ -130,6 +130,12 @@ public class Junit5TestJpa {
         teaRepo.save(teacher1);
     }
     @Test
+    void findAllTea(){
+        List<Teacher> all = teaRepo.findAll();
+        all.forEach(it-> System.out.println(it.getName()));
+    }
+
+    @Test
     void findTea(){
         teaRepo.findByName("王1");
     }
