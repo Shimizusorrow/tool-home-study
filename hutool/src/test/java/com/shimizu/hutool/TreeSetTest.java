@@ -18,18 +18,9 @@ import java.util.*;
 public class TreeSetTest {
     @Test
     void test() {
+        String x="xxxx";
 
-        List<String> list = new ArrayList();
-        String s = null;
-        list.add("1");
-        list.add("2");
-        list.add("3");
-        list.add("4");
-        if (!list.isEmpty()) {
-            s = list.get(list.size() - 1);
-        }
-        System.out.println(s);
-
+        System.out.println(String.format("%X",15));
 
     }
 
