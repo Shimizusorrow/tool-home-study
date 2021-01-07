@@ -6,6 +6,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import javax.management.timer.Timer;
+import java.io.PipedReader;
 import java.lang.reflect.Array;
 import java.nio.charset.Charset;
 import java.util.*;
@@ -24,11 +25,44 @@ import static com.shimizu.hutool.BoxRfidParseUtils.parseEquipCount;
 public class HuToolTest {
     @Test
     void test1() {
-        List<String> list = new ArrayList<>(500);
-        for (int i = 0; i < 500; i++) {
-            list.add(System.currentTimeMillis() +"***"+ String.valueOf((int) (Math.random() * 999)));
+        List<List<Integer>> lists = new ArrayList<>();
+        List<Integer> list = new ArrayList<>(500);
+        for (int i = 0; i < 5; i++) {
+            List<Integer> list1 = new ArrayList<>();
+            for (int j = 0; j < 5; j++) {
+                list1.add((int) (Math.random() * 999));
+            }
+            lists.add(list1);
         }
-        list.forEach(it-> System.out.println(it));
+        lists.forEach(it -> {
+            it.forEach(i -> {
+                System.out.println(i);
+            });
+            System.out.println("******");
+        });
+
+        System.out.println("------------");
+        lists=sorteds(lists);
+        lists.forEach(it -> {
+            it.forEach(i -> {
+                System.out.println(i);
+            });
+            System.out.println("******");
+        });
+        list.forEach(it -> System.out.println(it));
+    }
+
+    private List<List<Integer>> sorteds(List<List<Integer>> lists) {
+        lists.forEach(it->{
+            sorted(it);
+        });
+        return lists;
+    }
+
+    private List<Integer> sorted(List<Integer> list) {
+        Collections.sort(list);
+        list.forEach(it -> it = it + 1);
+        return list;
     }
 
     @Test
