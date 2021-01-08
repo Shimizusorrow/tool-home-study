@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Student">
+
+    <resultMap id="studentMap" type="com.example.mybatis.domain.Student">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="sal" column="sal"/>
+    </resultMap>
+
+    <insert id="add" parameterType="com.example.mybatis.domain.Student">
+        INSERT into TOOL_HOME.STUDENTS(ID, NAME, SAL) value (#{id}, #{name}, #{sal});
+    </insert>
+
+    <select id="findById" parameterType="int" resultType="com.example.mybatis.domain.Student">
+        select *
+        from students s
+        where s.id = #{id}
+    </select>
+
+    <select id="findAll" resultMap="Student.studentMap">
+        select * from students
+    </select>
+</mapper>

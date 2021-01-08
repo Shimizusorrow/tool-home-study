@@ -2,11 +2,16 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-
     <!--    加载类路径下的属性文件-->
     <properties resource="db.properties"/>
+
+    <typeAliases>
+        <package name="com.example.mybatis.domain"/>
+    </typeAliases>
+
     <!--    设置一个默认的连接环境信息-->
     <environments default="mysql_developer">
+
         <!--        连接环境信息,取任意一个唯一的名字-->
         <environment id="mysql_developer">
             <transactionManager type="jdbc"></transactionManager>
@@ -35,8 +40,8 @@
     </environments>
 
     <mappers>
-<!--        <mapper resource="student.xml"/>-->
-        <mapper class="com.example.mybatis.domain.Student"/>
+<!--        <package name="com.example.mybatis.domain"/>-->
+        <mapper resource="mapper/student.xml"/>
     </mappers>
 
 

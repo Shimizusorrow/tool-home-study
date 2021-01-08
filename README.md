@@ -1,12 +1,14 @@
 # tool-home-study
-# 自己对不同工具类使用测试的一个项目
+## 自己对不同工具类使用测试的一个项目
+
 ---
-## 目前总共分为5个模块
+## 目前总共分为6个模块
 - excel模块
 - hutool模块
 - jpa模块
 - rabbitmq模块
 - redis模块
+- mybatis 模块
 --- 
 ### excel模块
 测试读取Excel表格数据到java程序中
@@ -23,4 +25,6 @@
 初学redis 
 简单的使用
 包括简单使用Springboot集成的template
+### mybatis 模块
+初学mybatis
 
