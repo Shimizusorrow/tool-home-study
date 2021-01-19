@@ -1,8 +1,8 @@
 package com.shimizu.hutool;
 
+import lombok.Getter;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTestContextBootstrapper;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.BootstrapWith;
@@ -18,6 +18,21 @@ public class ValueTest {
     void testList() {
         System.out.println(Box.name);
         System.out.println(Box.goods);
+    }
+
+    @Test
+    void test(){
+        Da d =new Da(1);
+        System.out.println(d.getA());
+    }
+
+    @Getter
+    class Da{
+        private final int a;
+
+        Da(int a) {
+            this.a = a;
+        }
     }
 
     @Test

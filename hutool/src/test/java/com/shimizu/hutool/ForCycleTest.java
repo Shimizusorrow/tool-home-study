@@ -14,11 +14,10 @@ public class ForCycleTest {
      */
     @Test
     void forTest() throws Exception {
-
-        for (int i=0;i<10;i++){
-            System.out.println(i);
-            Thread.sleep(Timer.ONE_SECOND*3);
+        StringBuilder sb = new StringBuilder();
+        for (int i=0;i<1000;i++){
+            sb.append(i+",");
         }
-        System.out.println("done------");
+        System.out.println(sb.toString());
     }
 }

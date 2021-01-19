@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 /**
  * @author Shimizu
  * @description
@@ -25,5 +27,11 @@ public class ConcurrentTestingController {
     @GetMapping
     public void test(@RequestParam String name) {
         myResultDomainService.testConcurrentTest(name);
+    }
+
+    @ApiOperation("测试并发 删除新增")
+    @GetMapping("test")
+    public void del_inser(@RequestParam List<String> names) {
+        myResultDomainService.deleteAndInsert(names);
     }
 }
