@@ -1,6 +1,10 @@
 package com.shimizu.hutool;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * 用于解析箱Rfid
@@ -121,5 +125,48 @@ public class BoxRfidParseUtils {
             set.add(rfidNoSerial + String.format("%04x", serialNumber + l));
         }
         return set;
+    }
+    /**
+     * 解析箱Rfid 返回所带标点装备Rfid List
+     *
+     * @param boxRfid
+     * @return
+     */
+
+    /**
+     * 单个日期内Rfid的最大数量
+     */
+    private static final Integer MAX = 65535;
+    public static List<String> parseBoxRfid2EquipRfidList(String boxRfid) {
+        List<String> list = new ArrayList<>();
+        String rfidNoSerial = parseEquipRfidNoSerial(boxRfid);
+        Long serialNumber = Long.parseLong(parseEquipSerialNumber(boxRfid), 16);
+        Long equipCount = Long.parseLong(parseEquipCount(boxRfid), 16);
+        for (long l = 0; l < equipCount; l++) {
+            if (serialNumber + l > BoxRfidParseUtils.MAX) {
+//                throw new Exception(String.format("生成的散件Rfid数量 超过单日最大值," +
+//                        "请重新选择日期生成!剩余该日可生成的数量为[%d]件装备", l - 1));
+            }
+            list.add(rfidNoSerial + String.format("%04X", serialNumber + l));
+        }
+        return list;
+    }
+
+
+    public static Set<String> parseBoxList2Set(List<String> rfids) {
+        Set<String> parseboxrfids = new HashSet<>();
+        rfids.forEach(rfid -> {
+            rfid = rfid.toUpperCase();
+            if (rfid.length() == 32) {
+                List<String> tempList = parseBoxRfid2EquipRfidList(rfid)
+                        .stream()
+                        .map(String::toLowerCase)
+                        .collect(Collectors.toList());
+                parseboxrfids.addAll(tempList);
+            } else if (rfid.length() == 24) {
+                parseboxrfids.add(rfid);
+            }
+        });
+        return parseboxrfids;
     }
 }
