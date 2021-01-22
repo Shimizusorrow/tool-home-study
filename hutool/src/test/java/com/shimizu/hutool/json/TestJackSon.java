@@ -3,7 +3,10 @@ package com.shimizu.hutool.json;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.JavaType;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.JsonNodeType;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.slf4j.Logger;
@@ -24,6 +27,29 @@ import java.util.List;
 @ExtendWith(SpringExtension.class)
 public class TestJackSon {
     private final Logger log = LoggerFactory.getLogger(TestJackSon.class);
+    private static ObjectMapper mapper = new ObjectMapper();
+
+    static {
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+    }
+
+    @Test
+    void testTreeNode() throws JsonProcessingException {
+        String jsonString = "{\"name\":\"Mahesh\", \"age\":21}";
+        String jsonArray = "[{\"name\":\"hello\"}]";
+        JsonNode jsonNode = mapper.readTree(jsonString);
+        JsonNode readTree = mapper.readTree(jsonArray);
+        System.out.println(readTree.isArray());
+        System.out.println(readTree.get(0).get("name").asText());
+        JsonNodeType nodeType = jsonNode.getNodeType();
+        Class<JsonNodeType> aClass = nodeType.getDeclaringClass();
+        System.out.println(jsonNode.get("0"));
+        System.out.println(jsonNode.get(0));
+        System.out.println(jsonNode.isObject());
+        System.out.println(jsonNode.isArray());
+        System.out.println(jsonNode.isBigDecimal());
+
+    }
 
     /**
      * 使用JsonUtil 工具
@@ -50,7 +76,8 @@ public class TestJackSon {
             }});
         }
         String json = JsonUtils.writeValueAsString(rs);
-        List<Temp2> temp2s = JsonUtils.readValue(json, new TypeReference<List<Temp2>>() {});
+        List<Temp2> temp2s = JsonUtils.readValue(json, new TypeReference<List<Temp2>>() {
+        });
         temp2s.forEach(it -> log.info(it.name));
         log.info(json);
     }
