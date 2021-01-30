@@ -30,7 +30,7 @@ public class UserDomainServiceImpl implements UserDetailsService {
             String superAdmin = "超级管理员";
             String superAdminUsername = "1";
             String superAdminPassword = "1";
-            userRepository.save(new User(superAdminUsername, superAdminPassword,
+            save(new User(superAdminUsername, superAdminPassword,
                     User.Role.SUPER_ADMIN, superAdmin));
         }
     }
