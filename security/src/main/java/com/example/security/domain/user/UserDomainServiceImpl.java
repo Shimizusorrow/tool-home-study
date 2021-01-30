@@ -1,6 +1,7 @@
 package com.example.security.domain.user;
 
 import com.example.security.repository.user.UserRepository;
+import com.example.security.util.PasswordEncoderUtils;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -38,6 +39,9 @@ public class UserDomainServiceImpl implements UserDetailsService {
         if (userRepository.existsByUsername(user.getUsername())) {
             throw new RuntimeException("账号已存在");
         }
+        user.setPassword(PasswordEncoderUtils
+                .getBCryptPasswordEncoder()
+                .encode(user.getPassword()));
         return userRepository.save(user);
     }
 }

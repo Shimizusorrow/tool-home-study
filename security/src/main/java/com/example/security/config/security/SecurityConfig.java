@@ -3,6 +3,7 @@ package com.example.security.config.security;
 import com.example.security.config.security.jwt.JwtAuthenticationSuccessHandler;
 import com.example.security.config.security.jwt.JwtAuthenticationTokenFilter;
 import com.example.security.config.security.jwt.JwtProvider;
+import com.example.security.util.PasswordEncoderUtils;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -14,6 +15,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -47,7 +49,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // 设置UserDetailsService
                 .userDetailsService(userDetailsService)
                 // 使用BCrypt进行密码的hash --不加密
-                .passwordEncoder(passwordEncoder());
+                .passwordEncoder(PasswordEncoderUtils.getBCryptPasswordEncoder());
     }
 
     // 装载 无加密
@@ -75,8 +77,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/auth/**").permitAll()
                 //除上面之外的所有请求全都需要鉴权认证
                 //.anyRequest().authenticated();
-                .antMatchers("/swagger-ui.html")
-                .authenticated()
+//                .antMatchers("/swagger-ui.html")
+//                .authenticated()
                 .and().
                 formLogin(login -> {
                     login.loginProcessingUrl("/login")
