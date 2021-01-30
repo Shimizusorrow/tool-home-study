@@ -14,7 +14,7 @@ import java.util.Optional;
  * @description
  * @date 2021-01-29 11:41
  */
-@Service
+@Service("UserDomainServiceImpl")
 @AllArgsConstructor
 public class UserDomainServiceImpl implements UserDetailsService {
     private final UserRepository userRepository;
