@@ -2,6 +2,7 @@ package com.example.security.config.security;
 
 import com.example.security.config.security.jwt.JwtAuthenticationSuccessHandler;
 import com.example.security.config.security.jwt.JwtAuthenticationTokenFilter;
+import com.example.security.config.security.jwt.JwtProvider;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -35,10 +36,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final JwtAuthenticationSuccessHandler jwtAuthenticationSuccessHandler;
 
+    private final AuthFailureHandler authFailureHandler;
+
+    private final JwtProvider jwtProvider;
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth    // 设置UserDetailsService
-                .userDetailsService(this.userDetailsService)
+        auth
+                .authenticationProvider(jwtProvider)
+                // 设置UserDetailsService
+                .userDetailsService(userDetailsService)
                 // 使用BCrypt进行密码的hash --不加密
                 .passwordEncoder(passwordEncoder());
     }
@@ -73,7 +80,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().
                 formLogin(login -> {
                     login.loginProcessingUrl("/login")
-                            .successHandler(jwtAuthenticationSuccessHandler);
+                            .successHandler(jwtAuthenticationSuccessHandler)
+                            .failureHandler(authFailureHandler);
                 });
 
         //禁用缓存
