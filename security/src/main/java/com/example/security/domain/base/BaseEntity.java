@@ -1,7 +1,8 @@
 package com.example.security.domain.base;
 
+import io.swagger.annotations.ApiModelProperty;
+
 import javax.persistence.*;
-import java.io.Serializable;
 
 /**
  * @author Shimizu
@@ -9,20 +10,24 @@ import java.io.Serializable;
  * @date 2021-01-29 10:51
  */
 @MappedSuperclass
-public abstract class BaseEntity extends BaseId implements Serializable {
+public abstract class BaseEntity extends BaseId {
+    public static final String LIFE_CYCLE = "life_cycle";
     /**
      * 创建时间
      */
+    @ApiModelProperty(hidden = true)
     private Long createTime;
 
     /**
      * 更新时间
      */
+    @ApiModelProperty(hidden = true)
     private Long updateTime;
 
     /**
      * 实体的生命周期
      */
+    @ApiModelProperty(hidden = true)
     @Enumerated(EnumType.STRING)
     private LifeCycle lifeCycle;
 

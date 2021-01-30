@@ -6,13 +6,14 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.GenericGenerator;
+import org.springframework.data.annotation.Id;
 import org.springframework.lang.NonNull;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.Collection;
 
 /**
@@ -25,6 +26,7 @@ import java.util.Collection;
 @Setter
 @Getter
 @Api(tags = "用户")
+//@Table(indexes = @Index(columnList = BaseEntity.LIFE_CYCLE))
 public class User extends BaseEntity implements UserDetails {
     @ApiModelProperty(value = "账号")
     @NonNull
@@ -38,6 +40,11 @@ public class User extends BaseEntity implements UserDetails {
     @Enumerated(EnumType.STRING)
     @NonNull
     private Role role;
+
+    @ApiModelProperty("用户名称")
+    @NotBlank
+    private String name;
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -64,7 +71,7 @@ public class User extends BaseEntity implements UserDetails {
         return true;
     }
 
-    enum Role {
+    public enum Role {
         /**
          * 权限
          */
@@ -79,5 +86,20 @@ public class User extends BaseEntity implements UserDetails {
         Role(String chinese) {
             this.chinese = chinese;
         }
+    }
+
+    /**
+     * 通用构造器
+     *
+     * @param username
+     * @param password
+     * @param role
+     * @param name
+     */
+    public User(@NonNull String username, @NonNull String password, @NonNull Role role, @NotBlank String name) {
+        this.username = username;
+        this.password = password;
+        this.role = role;
+        this.name = name;
     }
 }

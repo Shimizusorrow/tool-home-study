@@ -1,9 +1,11 @@
 package com.example.security.domain.base;
 
 import org.hibernate.annotations.GenericGenerator;
-import org.springframework.data.annotation.Id;
 
+
+import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import java.io.Serializable;
 import java.util.Objects;
@@ -14,10 +16,11 @@ import java.util.Objects;
  * @date 2021-01-29 10:52
  */
 @MappedSuperclass
-public abstract class BaseId implements Serializable {
+public abstract class BaseId {
     @Id
     @GenericGenerator(name = "baseIdGenerator", strategy = "uuid")
     @GeneratedValue(generator = "baseIdGenerator")
+    @Column(length = 40)
     private String id;
 
     /**

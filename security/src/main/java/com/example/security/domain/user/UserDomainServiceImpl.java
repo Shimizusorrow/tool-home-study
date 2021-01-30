@@ -7,6 +7,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 /**
  * @author Shimizu
  * @description
@@ -14,11 +16,28 @@ import org.springframework.stereotype.Service;
  */
 @Service
 @AllArgsConstructor
-public class UserDomainService implements UserDetailsService {
+public class UserDomainServiceImpl implements UserDetailsService {
     private final UserRepository userRepository;
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         return userRepository.findByUsername(s).orElseThrow(() -> new RuntimeException("用户不存在"));
+    }
+
+    public void initSuperAdmin() {
+        if (!userRepository.existsByRole(User.Role.SUPER_ADMIN)) {
+            String superAdmin = "超级管理员";
+            String superAdminUsername = "1";
+            String superAdminPassword = "1";
+            userRepository.save(new User(superAdminUsername, superAdminPassword,
+                    User.Role.SUPER_ADMIN, superAdmin));
+        }
+    }
+
+    public User save(User user) {
+        if (userRepository.existsByUsername(user.getUsername())) {
+            throw new RuntimeException("账号已存在");
+        }
+        return userRepository.save(user);
     }
 }
