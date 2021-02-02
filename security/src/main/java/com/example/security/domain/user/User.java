@@ -26,7 +26,7 @@ import java.util.Collection;
 @Setter
 @Getter
 @Api(tags = "用户")
-//@Table(indexes = @Index(columnList = BaseEntity.LIFE_CYCLE))
+@Table(indexes = @Index(name = BaseEntity.LIFE_CYCLE, columnList = BaseEntity.LIFE_CYCLE))
 public class User extends BaseEntity implements UserDetails {
     @ApiModelProperty(value = "账号")
     @NonNull
@@ -44,6 +44,10 @@ public class User extends BaseEntity implements UserDetails {
     @ApiModelProperty("用户名称")
     @NotBlank
     private String name;
+
+    @ApiModelProperty("性别")
+    @Column(columnDefinition = "varchar(255) default 'man'")
+    private String gender;
 
 
     @Override

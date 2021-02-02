@@ -11,7 +11,7 @@ import javax.persistence.*;
  */
 @MappedSuperclass
 public abstract class BaseEntity extends BaseId {
-    public static final String LIFE_CYCLE = "life_cycle";
+    public static final String LIFE_CYCLE = "lifeCycle";
     /**
      * 创建时间
      */
@@ -29,7 +29,8 @@ public abstract class BaseEntity extends BaseId {
      */
     @ApiModelProperty(hidden = true)
     @Enumerated(EnumType.STRING)
-    private LifeCycle lifeCycle;
+    @Column(nullable = false)
+    private LifeCycle lifeCycle = LifeCycle.RUNNING;
 
     enum LifeCycle {
         /**
