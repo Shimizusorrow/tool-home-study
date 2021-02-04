@@ -1,14 +1,12 @@
 package com.example.security.domain.user;
 
-import com.example.security.repository.user.UserRepository;
+import com.example.security.repository.UserRepository;
 import com.example.security.util.PasswordEncoderUtils;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 /**
  * @author Shimizu
