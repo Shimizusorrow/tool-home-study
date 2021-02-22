@@ -1,6 +1,7 @@
 package com.shimizu.jpa.controller;
 
 import com.shimizu.jpa.annotion.LogAnnotation;
+import com.shimizu.jpa.annotion.SuperAnnotation;
 import com.shimizu.jpa.domain.Equip;
 import com.shimizu.jpa.domain.Teacher;
 import com.shimizu.jpa.repo.EquipRepo;

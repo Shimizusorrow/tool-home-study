@@ -5,12 +5,13 @@ import java.lang.annotation.*;
 /**
  * @author Shimizu
  * @description
- * @date 2021-02-22 07:57
+ * @date 2021-02-22 08:40
  */
-@Documented
+@LogAnnotation
+@Target({ElementType.TYPE, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
-@Target(value = {ElementType.METHOD, ElementType.TYPE})
+@Documented
 @Inherited
-public @interface LogAnnotation {
+public @interface SuperAnnotation {
     String value() default "";
 }
