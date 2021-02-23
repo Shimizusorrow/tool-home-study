@@ -4,7 +4,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
@@ -18,7 +17,12 @@ import java.util.HashMap;
 @Aspect
 @Slf4j
 public class LogComponent {
-
+    /**
+     * "@annotation(com.shimizu.jpa.annotion.LogAnnotation)" 注解类型切点表达式
+     *
+     * @param proceedingJoinPoint
+     * @return
+     */
     @Around("@annotation(com.shimizu.jpa.annotion.LogAnnotation)")
     public Object logPrint(ProceedingJoinPoint proceedingJoinPoint) {
         String functionName = proceedingJoinPoint.getSignature().getName();

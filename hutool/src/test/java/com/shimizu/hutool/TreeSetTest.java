@@ -8,6 +8,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author Shimizu
@@ -16,11 +17,36 @@ import java.util.*;
  */
 @ExtendWith(SpringExtension.class)
 public class TreeSetTest {
+
+    /**
+     * 过滤condition中存在的元素
+     *
+     * @param condition
+     * @param target
+     * @return
+     */
+    private <T> void filter(Collection<T> condition, Collection<T> target) {
+        target = target.stream()
+                .filter(it -> !condition.contains(it))
+                .collect(Collectors.toList());
+    }
+
+    @Test
+    void filterTest() {
+//        List<Integer> list = new ArrayList<>(Arrays.asList(0, 1, 2, 3, 4));
+//        List<Integer> condition = new ArrayList<>(Arrays.asList(0, 1, 2, 3));
+////        list = filter(condition, list);
+//        filter(condition, list);
+//        list.forEach(it -> System.out.println(it));
+        System.out.println(((long) Integer.MAX_VALUE * 100));
+    }
+
+
     @Test
     void test() {
-        String x="xxxx";
+        String x = "xxxx";
 
-        System.out.println(String.format("%X",15));
+        System.out.println(String.format("%X", 15));
 
     }
 
@@ -54,7 +80,7 @@ public class TreeSetTest {
     }
 
     @Test
-    void box(){
+    void box() {
 
         System.out.println(BoxRfidParseUtils.parseEquipSerialNumber("33030024101004131dd800260021FFFF"));
         System.out.println(BoxRfidParseUtils.parseEquipSerialNumber("33030024101004131dd800240021FFFF"));
