@@ -11,9 +11,14 @@ import org.springframework.boot.test.autoconfigure.data.redis.DataRedisTest;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import sun.reflect.generics.tree.VoidDescriptor;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -95,6 +100,41 @@ public class MapRedisTest {
 //        redisTemplate.opsForHash().delete(KEY, strings.toArray());
         redisTemplate.opsForHash().delete(KEY, new String[]{"0", "1"});
     }
+    public static final Calendar CALENDAR =Calendar.getInstance();
+    @Test
+    void test(){
+        LocalDateTime localDateTime=LocalDateTime.now();
+        System.out.println(localDateTime.getYear());
+        System.out.println(localDateTime.getMonthValue());
+//        String year="2021";
+//        String year1="2021";
+//        String month="2";
+//        String month1="1";
+//
+//        CALENDAR.set(Integer.valueOf(year), Integer.valueOf(month), 0); //输入类型为int类型
+//        System.out.println(CALENDAR.get(Calendar.DAY_OF_MONTH));
+//        CALENDAR.set(Integer.valueOf(year1),Integer.valueOf(month1),0);
+//        System.out.println(CALENDAR.get(Calendar.DAY_OF_MONTH));
+    }
 
+
+    public static final String THE_KEY="2021:3:3";
+    @Test
+    void test1(){
+        redisTemplate.opsForList().rightPush(THE_KEY,"123");
+        redisTemplate.opsForList().leftPush(THE_KEY,"321");
+        redisTemplate.expire(THE_KEY,60, TimeUnit.SECONDS);
+    }
+    @Test
+    void test3(){
+        redisTemplate.opsForList().leftPush(THE_KEY,"3212");
+    }
+
+    @Test
+    void test2(){
+        List<String> range = redisTemplate.opsForList().range(THE_KEY, 0, -1);
+        System.out.println(range.size());
+        range.forEach(System.out::println);
+    }
 
 }

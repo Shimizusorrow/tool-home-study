@@ -137,4 +137,13 @@ public class StreamTest {
                     '}';
         }
     }
+
+    @Test
+    void test() {
+        List<String> list = Arrays.asList("1-1,1-2,1-3");
+        String a="1-02";
+        String[] split = a.split("-");
+        System.out.println(Integer.parseInt(split[0]));
+        System.out.println(Integer.parseInt(split[1]));
+    }
 }
