@@ -137,4 +137,10 @@ public class MapRedisTest {
         range.forEach(System.out::println);
     }
 
+    @Test
+    void del(){
+        redisTemplate.delete(THE_KEY);
+        System.out.println(redisTemplate.hasKey(THE_KEY));
+    }
+
 }

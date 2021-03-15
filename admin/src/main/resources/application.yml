@@ -4,3 +4,16 @@ spring:
 
 server:
   port: 8769
+
+organ:
+  houses:
+    - id: smeggkf
+      name: shimen
+      appId: jB2oJJcUY6i
+      secret: Ba3Nz4K9Ux0aa
+      address: http://15.144.41.227:8080/equipment/rest/open
+    - id: test
+      name: shimen
+      appId: jB2oJJcUY6i
+      secret: Ba3Nz4K9Ux0aa
+      address: http://192.168.1.39:8768

@@ -53,6 +53,7 @@ class ElementDomainServiceTest {
             );
             System.out.println("---");
         });
+        elementDomainRepository.delete(list.get(0));
     }
 
     @Test
