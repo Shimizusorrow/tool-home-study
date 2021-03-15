@@ -39,7 +39,8 @@ public class excelTest {
 
     @Test
     void useGetData() throws Exception {
-        getData(ExcelName, SHEET_NAME);
+//        getData(ExcelName, SHEET_NAME);
+        System.out.println(System.getProperty("user.dir"));
     }
 
     @Test
