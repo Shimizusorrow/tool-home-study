@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -20,6 +21,17 @@ import java.util.regex.Pattern;
  */
 @ExtendWith(SpringExtension.class)
 public class NormalTest {
+
+    @Test
+    void test23(){
+        List<String> list = Arrays.asList("1", "2", "3");
+        List<String> strings = Arrays.asList("1", "2","2","3");
+        System.out.println(
+                list.containsAll(strings)
+        );
+        LocalDateTime localDateTime = LocalDateTime.now();
+        System.out.println(localDateTime.getDayOfMonth());
+    }
 
     @Test
     void test() {

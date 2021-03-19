@@ -1,11 +1,12 @@
 package com.shimizu.jpa.controller;
 
+import com.shimizu.jpa.config.TimerProperties;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.autoconfigure.web.servlet.MultipartProperties;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.time.Duration;
 
 /**
  * @author Shimizu
@@ -17,10 +18,24 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 public class PropertiesController {
     private final MultipartProperties properties;
+    private final TimerProperties timerProperties;
 
     @GetMapping("/mulipart")
     @ApiOperation("MultipartProperties")
     public MultipartProperties getProperties() {
         return properties;
+    }
+
+    @GetMapping("/tool")
+    @ApiOperation("/TimerProperties")
+    public TimerProperties properties() {
+        return timerProperties;
+    }
+
+    @PutMapping("/tool-update")
+    @ApiOperation("更改配置类")
+    public TimerProperties propertiesUp(@RequestParam long data) {
+        timerProperties.setF1Time(Duration.ofDays(data));
+        return timerProperties;
     }
 }
