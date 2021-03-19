@@ -24,13 +24,15 @@ public class NormalTest {
 
     @Test
     void test23(){
-        List<String> list = Arrays.asList("1", "2", "3");
+        List<String> list = new ArrayList<>(Arrays.asList("1", "2", "3"));
         List<String> strings = Arrays.asList("1", "2","2","3");
-        System.out.println(
-                list.containsAll(strings)
-        );
-        LocalDateTime localDateTime = LocalDateTime.now();
-        System.out.println(localDateTime.getDayOfMonth());
+
+        System.out.println(String.format("[%s]",list.toString()));
+//        System.out.println(
+//                list.containsAll(strings)
+//        );
+//        LocalDateTime localDateTime = LocalDateTime.now();
+//        System.out.println(localDateTime.getDayOfMonth());
     }
 
     @Test
