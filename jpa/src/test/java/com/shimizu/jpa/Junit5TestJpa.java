@@ -5,6 +5,7 @@ import com.shimizu.jpa.domain.StudentItems;
 import com.shimizu.jpa.domain.Teacher;
 import com.shimizu.jpa.repo.StuRepo;
 import com.shimizu.jpa.repo.TeaRepo;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,6 +57,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
  * 回滚 TODO 得对它进行测试 好像只回滚了最后一次提交的东西?!
  */
 @Rollback(value = false)
+@Disabled
 public class Junit5TestJpa {
     @Autowired
     private StuRepo stuRepo;

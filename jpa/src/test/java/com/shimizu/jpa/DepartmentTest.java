@@ -1,6 +1,7 @@
 package com.shimizu.jpa;
 
 import com.shimizu.jpa.config.DepartmentConfig;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import java.util.List;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @ActiveProfiles("junit")
+@Disabled
 public class DepartmentTest {
     @Autowired
     private DepartmentConfig departmentConfig;

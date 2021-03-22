@@ -10,6 +10,7 @@ import com.shimizu.jpa.repo.ChairRepository;
 import com.shimizu.jpa.repo.ClassRoomRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,6 +58,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
  */
 @Rollback(value = false)
 @Slf4j
+@Disabled
 public class TestChairJpa {
     @Autowired
     private ChairRepository chairRepository;

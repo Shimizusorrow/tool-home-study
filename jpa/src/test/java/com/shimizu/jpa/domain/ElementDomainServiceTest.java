@@ -1,6 +1,7 @@
 package com.shimizu.jpa.domain;
 
 import com.shimizu.jpa.repo.ElementDomainRepository;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @ActiveProfiles("junit")
 @ExtendWith(SpringExtension.class)
 @Rollback(false)
+@Disabled
 class ElementDomainServiceTest {
     @Autowired
     private ElementDomainRepository elementDomainRepository;

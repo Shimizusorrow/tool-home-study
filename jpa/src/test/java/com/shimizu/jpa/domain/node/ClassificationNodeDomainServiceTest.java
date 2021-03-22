@@ -1,6 +1,7 @@
 package com.shimizu.jpa.domain.node;
 
 import com.shimizu.jpa.repo.ClassificationNodeRepository;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 @SpringBootTest
 @ActiveProfiles("junit")
 @Rollback(value = false)
+@Disabled
 public class ClassificationNodeDomainServiceTest {
     @Autowired
     private ClassificationNodeRepository classificationNodeRepository;
