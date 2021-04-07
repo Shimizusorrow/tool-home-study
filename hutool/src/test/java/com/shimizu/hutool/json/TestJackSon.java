@@ -1,5 +1,6 @@
 package com.shimizu.hutool.json;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -7,6 +8,7 @@ import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.JsonNodeType;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.slf4j.Logger;
@@ -128,6 +130,32 @@ public class TestJackSon {
 
         public void setAge(String age) {
             this.age = age;
+        }
+    }
+
+    @Test
+    void testEnum() throws JsonProcessingException {
+        String A = "\"A\"";
+//        String s = mapper.writeValueAsString(A);
+        System.out.println(A);
+
+        TestEnum value = mapper.readValue(A, TestEnum.class);
+        Assertions.assertEquals(TestEnum.A, value);
+    }
+
+    public static enum TestEnum {
+        A, B;
+
+        @JsonCreator
+        public static <T> TestEnum formate(T name) {
+            if (name != null) {
+                if (name instanceof String) {
+                    String tp = (String) name;
+                    System.out.println("name is String");
+                    return TestEnum.valueOf(tp);
+                }
+            }
+            return null;
         }
     }
 }
