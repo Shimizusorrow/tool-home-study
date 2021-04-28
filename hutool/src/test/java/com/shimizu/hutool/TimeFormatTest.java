@@ -6,6 +6,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import javax.management.timer.Timer;
+import java.beans.Transient;
 import java.text.ParseException;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
@@ -21,7 +22,7 @@ public class TimeFormatTest {
         Long time = 63158400000L;
         Long day = time / Timer.ONE_DAY;
         System.out.println(day);
-        System.out.println(String.format("%x",day));
+        System.out.println(String.format("%x", day));
     }
 
     @Test
@@ -58,6 +59,12 @@ public class TimeFormatTest {
 
         System.out.println(time.getTime());
         System.out.println(millisecond2TimeFormat(System.currentTimeMillis()));
+    }
+
+    @Test
+    void testFeature() {
+        String data = "2021-10-30";
+        System.out.println(timeFormat2Millisecond(data));
     }
 
     /**

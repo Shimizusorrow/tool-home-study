@@ -25,7 +25,13 @@ public class SyStemTest {
     @Test
     void t2() {
         String s = "33030025101004131DF500050051FFFF";
-        BoxRfidParseUtils.parseBoxList2Set(Collections.singletonList(s)).forEach(it-> System.out.println(it));
+        BoxRfidParseUtils.parseBoxList2Set(Collections.singletonList(s)).forEach(it -> System.out.println(it));
+
+    }
+
+    @Test
+    void t3() {
+        System.out.println((String.format("%012x", (long) (Math.random() * 999999999999L)) + String.format("%012x", (long) (Math.random() * 999999999999L))).toUpperCase());
 
     }
 }
