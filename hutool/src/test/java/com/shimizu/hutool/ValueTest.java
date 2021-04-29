@@ -40,9 +40,12 @@ public class ValueTest {
         System.out.println(d.getA());
     }
 
-    @Getter
     class Da {
         private final int a;
+
+        public int getA() {
+            return a;
+        }
 
         Da(int a) {
             this.a = a;

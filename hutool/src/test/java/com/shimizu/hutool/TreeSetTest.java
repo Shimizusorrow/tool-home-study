@@ -86,12 +86,16 @@ public class TreeSetTest {
         System.out.println(BoxRfidParseUtils.parseEquipSerialNumber("33030024101004131dd800240021FFFF"));
     }
 
-    @Getter
-    @Setter
-    @NoArgsConstructor
     class Bos implements Comparable<Bos> {
         private String id;
 
+        public String getId() {
+            return id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
+        }
 
         public Bos(String id) {
             this.id = id;

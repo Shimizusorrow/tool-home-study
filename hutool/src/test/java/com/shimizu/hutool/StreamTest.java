@@ -1,12 +1,9 @@
 package com.shimizu.hutool;
 
-import lombok.Data;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.internal.matchers.ArrayEquals;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import java.lang.reflect.Array;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -116,7 +113,6 @@ public class StreamTest {
     /**
      * 测试类
      */
-    @Data
     private class User {
         private String name;
         private String gender;
@@ -136,12 +132,36 @@ public class StreamTest {
                     ", age=" + age +
                     '}';
         }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getGender() {
+            return gender;
+        }
+
+        public void setGender(String gender) {
+            this.gender = gender;
+        }
+
+        public Integer getAge() {
+            return age;
+        }
+
+        public void setAge(Integer age) {
+            this.age = age;
+        }
     }
 
     @Test
     void test() {
         List<String> list = Arrays.asList("1-1,1-2,1-3");
-        String a="1-02";
+        String a = "1-02";
         String[] split = a.split("-");
         System.out.println(Integer.parseInt(split[0]));
         System.out.println(Integer.parseInt(split[1]));
