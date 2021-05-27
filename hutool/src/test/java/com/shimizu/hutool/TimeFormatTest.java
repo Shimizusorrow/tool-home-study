@@ -72,8 +72,9 @@ public class TimeFormatTest {
      */
     @Test
     void _2020_12_2() {
-        System.out.println(30365080000L / Timer.ONE_DAY);
+//        System.out.println(30365080000L / Timer.ONE_DAY);
 //        System.out.println(Timer.ONE_DAY * 3);
+        System.out.println(Timer.ONE_HOUR);
     }
 
     /**
