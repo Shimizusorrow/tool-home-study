@@ -1,0 +1,11 @@
+spring:
+  test:
+    database:
+      replace: none
+  datasource:
+    #    DATABASE_TO_UPPER=false 默认是true 会将表变成大写 导致ObjectToBaseDtoConverter失败
+    url: jdbc:h2:mem:testdb;DATABASE_TO_UPPER=false;MODE=MySQL; #MODE=MYSQL 引入mysql语法特性
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
