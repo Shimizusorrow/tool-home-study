@@ -5,10 +5,35 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.*;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.stream.Collectors;
 
 @ExtendWith(SpringExtension.class)
 public class StreamTest {
+
+    @Test
+    void parallelStream() {
+        List<Integer> integers = new ArrayList<>();
+        for (int i = 0; i < 100000; i++) {
+            integers.add(i);
+        }
+        long time = System.currentTimeMillis();
+        List<String> strings = integers.parallelStream()
+                .collect(ArrayList::new,
+                        (arrayList, i) -> arrayList.add(i.toString()),
+                        List::addAll);
+        System.out.printf("方法一花费时间为 %.2f %n", (System.currentTimeMillis() - time) / 1000.0);
+        List<String> strings1 = new CopyOnWriteArrayList<>();
+        long time2 = System.currentTimeMillis();
+
+        integers.parallelStream().forEach(it -> {
+            strings1.add(it.toString());
+        });
+        System.out.printf("方法二花费时间为 %.2f %n", (System.currentTimeMillis() - time2) / 1000.0);
+//        List<String> strings2 = strings1.stream().map(it -> Integer.valueOf(it)).sorted().map(it -> it.toString()).collect(Collectors.toList());
+//        System.out.println(strings);
+//        System.out.println(strings2);
+    }
 
     @Test
     void filterTest() {

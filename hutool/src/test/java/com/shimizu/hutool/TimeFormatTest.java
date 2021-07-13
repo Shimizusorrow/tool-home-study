@@ -12,6 +12,7 @@ import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Calendar;
 import java.util.Date;
 
 @ExtendWith(SpringExtension.class)
@@ -75,6 +76,24 @@ public class TimeFormatTest {
 //        System.out.println(30365080000L / Timer.ONE_DAY);
 //        System.out.println(Timer.ONE_DAY * 3);
         System.out.println(Timer.ONE_HOUR);
+        System.out.println(94608000000L / (Timer.ONE_DAY * 365));
+    }
+
+    @Test
+    void _2021_6_25() {
+        // 获取当前时间
+        Calendar currCal = Calendar.getInstance();
+        Calendar time = Calendar.getInstance();
+        time.clear();
+        time.set(Calendar.YEAR, currCal.get(Calendar.YEAR));
+        long startTime = time.getTimeInMillis();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        System.out.println(format.format(time.getTime()));
+        System.out.println(startTime);
+        time.roll(Calendar.DAY_OF_YEAR, -1);
+        long endTime = time.getTimeInMillis();
+        System.out.println(format.format(time.getTime()));
+        System.out.println(endTime);
     }
 
     /**
